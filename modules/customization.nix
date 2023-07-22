@@ -2,18 +2,28 @@
 
 {
   # System Customization
-  ## Cursor
-  gtk.enable = true;
-  gtk.cursorTheme.package = pkgs.vanilla-dmz;
-  gtk.cursorTheme.name = "Vanilla-DMZ";
-  gtk.theme.package = pkgs.vanilla-dmz;
-  gtk.theme.name = "Vanilla-DMZ";
+  ## Font
+  home.packages = with pkgs; [
+    meslo-lgs-nf
+    apple-cursor
+  ];
   
-  home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
-  home.pointerCursor = {
-    x11.enable = true;
-    package = pkgs.vanilla-dmz;
-    name = "Vanilla-DMZ";
-    size = 24;
+  ## Cursor
+  gtk = {
+    enable = true;
+    cursorTheme.package = pkgs.apple-cursor;
+    cursorTheme.name = "MacOS-Monterey";
+    theme.package = pkgs.apple-cursor;
+    theme.name = "MacOS-Monterey";
   };
+  
+  home.pointerCursor = {
+    gtk.enable = true;
+    x11.enable = true;
+    package = pkgs.apple-cursor;
+    name = "MacOS-Monterey";
+    size = 16;
+  };
+
+  home.file.".icons/default".source = "${pkgs.apple-cursor}/share/icons/MacOS-Monterey";
 }

@@ -3,14 +3,26 @@
 {
   home.packages = with pkgs; [
     # Utilities
-    flameshot
+    # flameshot
     st
     dmenu
     xclip
     gnome.gnome-system-monitor
     winetricks
+    xcompmgr
+    clipmenu
+    clipnotify
+
+    ## Screenshot
+    maim
+    xdotool
+
+    ## FM
+    ranger
+    ueberzug
   ];
   
+
   # Setup Monitors
   programs.autorandr = {
     enable = true;
@@ -41,4 +53,19 @@
       };
     };
   };
+
+  nixpkgs.overlays = [ (self: super:
+    {
+      st = super.st.overrideAttrs (old: {
+        patches = (old.patches or []) ++ [
+          # (super.fetchpatch {
+          #   url = "https://st.suckless.org/patches/scrollback/st-scrollback-0.8.5.diff";
+          #   hash = "ZZAbrWyIaYRtw+nqvXKw8eXRWf0beGNJgoupRKsr2lc";
+          # })
+          ./patches/st-scrollback-0.8.5.diff
+          ./patches/st-hidecursor-0.8.3.diff
+        ];
+      });
+    }
+  ) ];
 }

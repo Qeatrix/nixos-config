@@ -4,8 +4,9 @@
   home.packages = with pkgs; [
     prismlauncher
 
-    vkBasalt
+    # vkBasalt
     mangohud
     goverlay
+    gamescope
   ];
 }

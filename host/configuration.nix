@@ -21,6 +21,17 @@
     networkmanager.enable = true;    
   };
 
+  # For mount.cifs, required unless domain name resolution is not needed.
+  fileSystems."/mnt/share" = {
+      device = "//192.168.1.11/share";
+      fsType = "cifs";
+      options = let
+        # this line prevents hanging on network split
+        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+
+      in ["${automount_opts},credentials=/etc/nixos/smb-secrets"];
+  };
+
 
   # Set your time zone.
   time.timeZone = "Asia/Yekaterinburg";
@@ -34,7 +45,11 @@
     helix
     killall
     btop
+    tbb
+    cifs-utils
    ];
+
+  programs.fish.enable = true;
   
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -43,9 +58,9 @@
       passwordFile = "/etc/nixos/secret.nix";
       isNormalUser = true;
       extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
-      shell = pkgs.bash;
     };
     
+    defaultUserShell = pkgs.fish;
     mutableUsers = false;
   };
 
@@ -101,12 +116,14 @@
         };
       };
     };
-    
+
     pulseaudio.enable = false;
   };
-  
+
 
   programs.dconf.enable = true;
+  virtualisation.docker.enable = true;
+  virtualisation.docker.enableNvidia = true;
 
 
   # Enable the OpenSSH daemon.
@@ -129,8 +146,12 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.05";
   
+  nixpkgs.config.permittedInsecurePackages = [
+    # "electron-21.4.0"
+    "python-2.7.18.6"
+  ];
 
   nix = {
     settings.auto-optimise-store = true;
@@ -143,6 +164,10 @@
 
     package = pkgs.nixFlakes;
     extraOptions = "experimental-features = nix-command flakes";
+  };
+
+  environment.sessionVariables = rec {
+    COLORTERM = "truecolor";
   };
 }
 
