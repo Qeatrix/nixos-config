@@ -43,6 +43,7 @@
     feh
     samba
     unzip
+    wineWowPackages.waylandFull
     # (python3.withPackages (ps: with ps; [ torch ]))
   ];
 

@@ -1,6 +1,6 @@
 { inputs, nixpkgs, home-manager, user, hostname, ... }:
 
-let 
+let
   system = "x86_64-linux";
   lib = nixpkgs.lib;
   defaultStateVersion = "23.05";
@@ -19,10 +19,11 @@ in
       ../desktops/plasma
       ./configuration.nix
 
-      
-      home-manager.nixosModules.home-manager {
+
+      home-manager.nixosModules.home-manager
+      {
         home-manager.users.${user} = {
-        home.stateVersion = defaultStateVersion;
+          home.stateVersion = defaultStateVersion;
           imports = [
             ./home.nix
             ../desktops/plasma/home.nix
@@ -33,17 +34,18 @@ in
       }
     ];
   };
-  
+
   dwm = lib.nixosSystem {
     inherit system;
     modules = [
       ../sysconfigs
       ../desktops/dwm
       ./configuration.nix
-      
-      home-manager.nixosModules.home-manager {
+
+      home-manager.nixosModules.home-manager
+      {
         home-manager.users.${user} = {
-        home.stateVersion = defaultStateVersion;
+          home.stateVersion = defaultStateVersion;
           imports = [
             ./home.nix
             ../desktops/dwm/home.nix
@@ -54,7 +56,29 @@ in
       }
     ];
   };
-  
+
+  awesome = lib.nixosSystem {
+    inherit system;
+    modules = [
+      ../sysconfigs
+      ../desktops/awesome
+      ./configuration.nix
+
+      home-manager.nixosModules.home-manager
+      {
+        home-manager.users.${user} = {
+          home.stateVersion = defaultStateVersion;
+          imports = [
+            ./home.nix
+            ../desktops/awesome/home.nix
+            ../modules
+            ../configs
+          ];
+        };
+      }
+    ];
+  };
+
   gnome = lib.nixosSystem {
     inherit system;
     modules = [
@@ -62,10 +86,11 @@ in
       ../desktops/gnome
       ./configuration.nix
 
-      
-      home-manager.nixosModules.home-manager {
+
+      home-manager.nixosModules.home-manager
+      {
         home-manager.users.${user} = {
-        home.stateVersion = defaultStateVersion;
+          home.stateVersion = defaultStateVersion;
           imports = [
             ./home.nix
             ../desktops/gnome/home.nix
@@ -84,10 +109,11 @@ in
       ../desktops/pantheon
       ./configuration.nix
 
-      
-      home-manager.nixosModules.home-manager {
+
+      home-manager.nixosModules.home-manager
+      {
         home-manager.users.${user} = {
-        home.stateVersion = defaultStateVersion;
+          home.stateVersion = defaultStateVersion;
           imports = [
             ./home.nix
             ../desktops/pantheon/home.nix
