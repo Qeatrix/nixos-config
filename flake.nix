@@ -3,7 +3,7 @@
 
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -17,13 +17,14 @@
       location = "$HOME/.setup";
       hostname = "qnt";
 
-    in {
-      
+    in
+    {
+
       nixosConfigurations = (
         import ./host {
           inherit (nixpkgs) lib;
           inherit inputs nixpkgs home-manager user hostname;
         }
       );
-  };
+    };
 }

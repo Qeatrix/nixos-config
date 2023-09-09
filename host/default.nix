@@ -1,7 +1,7 @@
 { inputs, nixpkgs, home-manager, user, hostname, ... }:
 
 let 
-  system = "x86_64-linux";                                  # System architecture
+  system = "x86_64-linux";
   lib = nixpkgs.lib;
   defaultStateVersion = "23.05";
 in
@@ -15,7 +15,7 @@ in
   plasma = lib.nixosSystem {
     inherit system;
     modules = [
-      ../conf
+      ../sysconfigs
       ../desktops/plasma
       ./configuration.nix
 
@@ -27,6 +27,7 @@ in
             ./home.nix
             ../desktops/plasma/home.nix
             ../modules
+            ../configs
           ];
         };
       }
@@ -36,7 +37,7 @@ in
   dwm = lib.nixosSystem {
     inherit system;
     modules = [
-      ../conf
+      ../sysconfigs
       ../desktops/dwm
       ./configuration.nix
       
@@ -47,6 +48,7 @@ in
             ./home.nix
             ../desktops/dwm/home.nix
             ../modules
+            ../configs
           ];
         };
       }
@@ -56,7 +58,7 @@ in
   gnome = lib.nixosSystem {
     inherit system;
     modules = [
-      ../conf
+      ../sysconfigs
       ../desktops/gnome
       ./configuration.nix
 
@@ -68,6 +70,7 @@ in
             ./home.nix
             ../desktops/gnome/home.nix
             ../modules
+            ../configs
           ];
         };
       }
@@ -77,7 +80,7 @@ in
   pantheon = lib.nixosSystem {
     inherit system;
     modules = [
-      ../conf
+      ../sysconfigs
       ../desktops/pantheon
       ./configuration.nix
 
@@ -89,6 +92,7 @@ in
             ./home.nix
             ../desktops/pantheon/home.nix
             ../modules
+            ../configs
           ];
         };
       }

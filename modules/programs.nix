@@ -7,19 +7,21 @@
 
     # Social
     telegram-desktop
+    armcord
 
     # Professional Software
     darktable
-    
+    gimp
+
     # Security
     keepassxc
     bitwarden
-    
+
     # Virtual
     podman
     toolbox
     distrobox
-    
+
     # Utilities
     gparted
     pavucontrol
@@ -27,7 +29,7 @@
 
     # Notes
     obsidian
-    
+
     # Tools
     git
     wget
@@ -41,12 +43,16 @@
     feh
     samba
     unzip
-
-    # Dev Env
-    nodejs
-    nodePackages.vls
-    nodePackages.typescript-language-server
-
-    (python3.withPackages(ps: with ps; [ torch ]))
+    # (python3.withPackages (ps: with ps; [ torch ]))
   ];
+
+  programs = {
+    direnv = {
+      enable = true;
+      enableFishIntegration = true; # see note on other shells below
+      nix-direnv.enable = true;
+    };
+
+    bash.enable = true; # see note on other shells below
+  };
 }

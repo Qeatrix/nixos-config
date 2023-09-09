@@ -6,5 +6,8 @@
     cpupower-gui
     gnome.gnome-tweaks
     gnome-extension-manager
+
+    # Extensions
+    gnomeExtensions.pano
   ];
 }

@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -15,21 +16,23 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  
+
   networking = {
     hostName = "qnt";
-    networkmanager.enable = true;    
+    networkmanager.enable = true;
   };
 
   # For mount.cifs, required unless domain name resolution is not needed.
   fileSystems."/mnt/share" = {
-      device = "//192.168.1.11/share";
-      fsType = "cifs";
-      options = let
+    device = "//192.168.1.11/share";
+    fsType = "cifs";
+    options =
+      let
         # this line prevents hanging on network split
         automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
 
-      in ["${automount_opts},credentials=/etc/nixos/smb-secrets"];
+      in
+      [ "${automount_opts},credentials=/etc/nixos/smb-secrets" ];
   };
 
 
@@ -47,10 +50,10 @@
     btop
     tbb
     cifs-utils
-   ];
+  ];
 
   programs.fish.enable = true;
-  
+
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users = {
@@ -59,12 +62,12 @@
       isNormalUser = true;
       extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
     };
-    
+
     defaultUserShell = pkgs.fish;
     mutableUsers = false;
   };
 
-  
+
   services = {
 
     ## Graphics
@@ -74,26 +77,28 @@
       xkbOptions = "grp:win_space_toggle";
       videoDrivers = [ "nvidia" ];
     };
-    
+
+    openssh.enable = true;
+
     ## Audio Server
     pipewire = {
-  	  enable = true;
-  	  alsa.enable = true;
-  	  alsa.support32Bit = true;
-  	  pulse.enable = true;
-    	# If you want to use JACK applications, uncomment this
-    	#jack.enable = true;
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      # If you want to use JACK applications, uncomment this
+      #jack.enable = true;
     };
-    
+
     flatpak.enable = true;
   };
-  
+
   sound = {
     enable = true;
     mediaKeys.enable = true;
   };
   security.rtkit.enable = true;
-  
+
 
   # Graphics Card Drivers
   hardware = {
@@ -102,11 +107,11 @@
 
     nvidia = {
       modesetting.enable = true;
-      forceFullCompositionPipeline = true;
+      forceFullCompositionPipeline = false;
       powerManagement.enable = true;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      package = config.boot.kernelPackages.nvidiaPackages.latest;
     };
-    
+
     bluetooth = {
       enable = true;
       hsphfpd.enable = false;
@@ -126,9 +131,6 @@
   virtualisation.docker.enableNvidia = true;
 
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
@@ -147,11 +149,11 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05";
-  
-  nixpkgs.config.permittedInsecurePackages = [
-    # "electron-21.4.0"
-    "python-2.7.18.6"
-  ];
+
+  # nixpkgs.config.permittedInsecurePackages = [
+  # "electron-21.4.0"
+  # "python-2.7.18.6"
+  # ];
 
   nix = {
     settings.auto-optimise-store = true;
