@@ -5,6 +5,11 @@
 { config, pkgs, ... }:
 
 {
+  environment.systemPackages = with pkgs; [
+    nvidia-vaapi-driver
+    egl-wayland
+  ];
+
   environment.gnome.excludePackages = (with pkgs; [
     gnome-photos
     gnome-tour
@@ -30,6 +35,16 @@
       };
       desktopManager.gnome.enable = true;
     };
+  };
+
+  hardware.opengl = {
+    extraPackages = with pkgs; [
+      vaapiVdpau
+      libvdpau-va-gl
+
+      # Test
+      nvidia-vaapi-driver
+    ];
   };
 }
 

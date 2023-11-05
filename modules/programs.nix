@@ -3,7 +3,7 @@
 {
   home.packages = with pkgs; [
     # Internet
-    google-chrome-dev
+    firefox
 
     # Social
     telegram-desktop
@@ -33,6 +33,7 @@
     # Tools
     git
     wget
+    xclip
     btop
     nvtop-nvidia
     lm_sensors
@@ -43,7 +44,8 @@
     feh
     samba
     unzip
-    wineWowPackages.waylandFull
+    lua-language-server
+    figma-agent
     # (python3.withPackages (ps: with ps; [ torch ]))
   ];
 

@@ -14,23 +14,39 @@
         typeHints.hideClosureInitialization = false;
       };
     };
+
     bash-language-server = {
       command = "${nodePackages.bash-language-server}/bin/bash-language-server";
       args = [ "start" ];
     };
+
     vscode-json-language-server = {
       command = "${nodePackages_latest.vscode-langservers-extracted}/bin/vscode-json-language-server";
       args = [ "--stdio" ];
       config.provideFormatter = true;
     };
+
     vscode-html-language-server = {
       command = "${nodePackages_latest.vscode-langservers-extracted}/bin/vscode-html-language-server";
       args = [ "--stdio" ];
       config.provideFormatter = true;
     };
+
     docker-langserver = {
       command = "${nodePackages.dockerfile-language-server-nodejs}/bin/docker-langserver";
       args = [ "--stdio" ];
+    };
+
+    lua-language-server = {
+      command = "${lua-language-server}/bin/lua-language-server";
+      config.Lua.hint = {
+        enable = true;
+        arrayIndex = "Enable";
+        setType = true;
+        paramName = "All";
+        paramType = true;
+        await = true;
+      };
     };
   };
 }

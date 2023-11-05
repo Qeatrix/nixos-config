@@ -12,20 +12,20 @@
     xserver = {
       displayManager = {
         lightdm.enable = true;
-        defaultSession = "none+awesome";
+        defaultSession = "none+i3";
         # setupCommands = ''
         #     LEFT='HDMI-2'
         #     CENTER='HDMI-1'
         #     xrandr --output $LEFT --mode 1360x768 --pos 0x312 --output $CENTER --primary --mode 1920x1080 --pos 1366x0
         # '';
+        sessionCommands = ''
+          ${pkgs.xorg.xrdb}/bin/xrdb -merge <${pkgs.writeText "Xresources" ''
+            Xft.dpi: 109
+          ''}
+        '';
       };
-
-      windowManager.awesome = {
-        enable = true;
-        luaModules = with pkgs.luaPackages; [
-          luarocks # is the package manager for Lua modules
-        ];
-      };
+      dpi = 109;
+      windowManager.i3.enable = true;
     };
   };
 

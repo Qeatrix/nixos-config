@@ -12,7 +12,7 @@
     xserver = {
       displayManager = {
         lightdm.enable = true;
-        defaultSession = "none+awesome";
+        defaultSession = "none+qtile";
         # setupCommands = ''
         #     LEFT='HDMI-2'
         #     CENTER='HDMI-1'
@@ -20,12 +20,7 @@
         # '';
       };
 
-      windowManager.awesome = {
-        enable = true;
-        luaModules = with pkgs.luaPackages; [
-          luarocks # is the package manager for Lua modules
-        ];
-      };
+      windowManager.qtile.enable = true;
     };
   };
 

@@ -2,23 +2,45 @@
 
 {
   home.packages = with pkgs; [
-    # Utilities
-    # flameshot
-    xterm
-    dmenu
+    # Browser
+    firefox
+
+    # Terminal
+    alacritty
+
+    # Media
+    pulsemixer
+    playerctl
+
+    # Clipboard
     xclip
-    gnome.gnome-system-monitor
-    # xcompmgr
-    # clipmenu
-    # clipnotify
 
-    ## Screenshot
-    # maim
-    # xdotool
+    # Image Managment
+    feh
+    maim
+    xdotool
+    slop
 
-    ## FM
+    # Launcher
+    rofi
+
+    # Display
+    sct
+    xcompmgr
+
+    # File Managment
     ranger
-    ueberzug
+    ueberzug # Render Images In Terminal
+
+    # Passwords
+    bitwarden-cli
+    rbw # Unofficial bitwarden cli client
+    rofi-rbw
+    pinentry
+
+    # Desktop Capture
+    obs-studio-plugins.obs-vaapi
+    linuxKernel.packages.linux_xanmod_latest.v4l2loopback
   ];
 
 
@@ -51,4 +73,60 @@
     #     };
     #   };
   };
-};
+
+  services.picom = {
+    enable = false;
+    backend = "glx";
+    settings =
+      {
+        glx-no-rebind-pixmap = true;
+        xrender-sync-fence = true;
+        refresh-rate = 165;
+        # corner-radius = 10;
+        xinerama-shadow-crop = true;
+        blur = {
+          method = "gaussian";
+          size = 15;
+          deviation = 5.0;
+        };
+
+        # animations = true;
+        # animation-for-open-window = "zoom";
+        # animation-for-transient-window = "slide-down";
+        # animation-stiffness = 350;
+        # animation-window-mass = 0.5;
+        # animation-dampening = 26;
+        # animation-for-workspace-switch-in = "slide-left";
+        # animation-for-workspace-switch-out = "slide-right";
+        # animation-delta = 10;
+        # animation-force_steps = false;
+        # animation-clamping = true;
+      };
+
+    activeOpacity = 1;
+
+    shadowExclude = [
+      "bounding_shaped && !rounded_corners"
+    ];
+
+    fade = false;
+    fadeDelta = 5;
+    opacityRules = [
+      "100:class_g   *?= 'Chromium-browser'"
+      "100:class_g   *?= 'Firefox'"
+      "100:class_g   *?= 'gitkraken'"
+      "100:class_g   *?= 'emacs'"
+      "100:class_g   ~=  'jetbrains'"
+      "100:class_g   *?= 'slack'"
+    ];
+    # extraArgs = [ "--experimental-backends" ];
+    package = pkgs.picom.overrideAttrs (o: {
+      src = pkgs.fetchFromGitHub {
+        repo = "picom";
+        owner = "pijulius";
+        rev = "982bb43e5d4116f1a37a0bde01c9bda0b88705b9";
+        sha256 = "YiuLScDV9UfgI1MiYRtjgRkJ0VuA1TExATA2nJSJMhM=";
+      };
+    });
+  };
+}

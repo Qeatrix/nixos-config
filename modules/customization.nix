@@ -12,6 +12,8 @@
     whitesur-icon-theme
   ];
 
+  gtk.font.package = pkgs.dejavu_fonts;
+
   ## Cursor
   home.pointerCursor =
     let

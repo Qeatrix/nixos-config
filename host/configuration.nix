@@ -26,13 +26,7 @@
   fileSystems."/mnt/share" = {
     device = "//192.168.1.11/share";
     fsType = "cifs";
-    options =
-      let
-        # this line prevents hanging on network split
-        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-
-      in
-      [ "${automount_opts},credentials=/etc/nixos/smb-secrets" ];
+    options = [ "credentials=/etc/nixos/smb-secrets,uid=1000,gid=100" ];
   };
 
 
@@ -44,13 +38,36 @@
   # $ nix search wget
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
+    # Text Editors
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     helix
+
+    # Utils
     killall
     btop
     tbb
     cifs-utils
+
+    # Nvidia Related
+    gst_all_1.gstreamer
+    # Common plugins like "filesrc" to combine within e.g. gst-launch
+    gst_all_1.gst-plugins-base
+    # Specialized plugins separated by quality
+    gst_all_1.gst-plugins-good
+    gst_all_1.gst-plugins-bad
+    gst_all_1.gst-plugins-ugly
+    # Plugins to reuse ffmpeg to play almost every video format
+    gst_all_1.gst-libav
+    # Support the Video Audio (Hardware) Acceleration API
+    gst_all_1.gst-vaapi
+
+    nvidia-vaapi-driver
+    nvidia-system-monitor-qt
+
+    linuxKernel.packages.linux_xanmod_latest.v4l2loopback
   ];
+  environment.localBinInPath = true;
+  fonts.fontDir.enable = true;
 
   programs.fish.enable = true;
 
@@ -76,6 +93,7 @@
       layout = "us,ru";
       xkbOptions = "grp:win_space_toggle";
       videoDrivers = [ "nvidia" ];
+      libinput.mouse.accelProfile = "flat";
     };
 
     openssh.enable = true;
@@ -102,14 +120,25 @@
 
   # Graphics Card Drivers
   hardware = {
-    opengl.enable = true;
-    opengl.driSupport32Bit = true;
+    opengl = {
+      enable = true;
+      driSupport32Bit = true;
+    };
 
     nvidia = {
       modesetting.enable = true;
       forceFullCompositionPipeline = false;
       powerManagement.enable = true;
-      package = config.boot.kernelPackages.nvidiaPackages.latest;
+      open = true;
+      # package = config.boot.kernelPackages.nvidiaPackages.latest;
+      # package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
+
+      package = (config.boot.kernelPackages.nvidiaPackages.stable.overrideAttrs {
+        src = pkgs.fetchurl {
+          url = "https://download.nvidia.com/XFree86/Linux-x86_64/525.125.06/NVIDIA-Linux-x86_64-525.125.06.run";
+          sha256 = "17av8nvxzn5af3x6y8vy5g6zbwg21s7sq5vpa1xc6cx8yj4mc9xm";
+        };
+      });
     };
 
     bluetooth = {
@@ -169,7 +198,9 @@
   };
 
   environment.sessionVariables = rec {
+    EDITOR = "hx";
     COLORTERM = "truecolor";
+    FREETYPE_PROPERTIES = "cff:no-stem-darkening=0 autofitter:no-stem-darkening=0";
   };
 }
 

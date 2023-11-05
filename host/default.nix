@@ -12,6 +12,8 @@ in
     users.quartix = ./home.nix;
   };
 
+
+  # Desktop Environments
   plasma = lib.nixosSystem {
     inherit system;
     modules = [
@@ -27,50 +29,6 @@ in
           imports = [
             ./home.nix
             ../desktops/plasma/home.nix
-            ../modules
-            ../configs
-          ];
-        };
-      }
-    ];
-  };
-
-  dwm = lib.nixosSystem {
-    inherit system;
-    modules = [
-      ../sysconfigs
-      ../desktops/dwm
-      ./configuration.nix
-
-      home-manager.nixosModules.home-manager
-      {
-        home-manager.users.${user} = {
-          home.stateVersion = defaultStateVersion;
-          imports = [
-            ./home.nix
-            ../desktops/dwm/home.nix
-            ../modules
-            ../configs
-          ];
-        };
-      }
-    ];
-  };
-
-  awesome = lib.nixosSystem {
-    inherit system;
-    modules = [
-      ../sysconfigs
-      ../desktops/awesome
-      ./configuration.nix
-
-      home-manager.nixosModules.home-manager
-      {
-        home-manager.users.${user} = {
-          home.stateVersion = defaultStateVersion;
-          imports = [
-            ./home.nix
-            ../desktops/awesome/home.nix
             ../modules
             ../configs
           ];
@@ -117,6 +75,140 @@ in
           imports = [
             ./home.nix
             ../desktops/pantheon/home.nix
+            ../modules
+            ../configs
+          ];
+        };
+      }
+    ];
+  };
+
+
+  # Window Managers
+  dwm = lib.nixosSystem {
+    inherit system;
+    modules = [
+      ../sysconfigs
+      ../desktops/dwm
+      ./configuration.nix
+
+      home-manager.nixosModules.home-manager
+      {
+        home-manager.users.${user} = {
+          home.stateVersion = defaultStateVersion;
+          imports = [
+            ./home.nix
+            ../desktops/dwm/home.nix
+            ../modules
+            ../configs
+          ];
+        };
+      }
+    ];
+  };
+
+  i3 = lib.nixosSystem {
+    inherit system;
+    modules = [
+      ../sysconfigs
+      ../desktops/i3
+      ./configuration.nix
+
+      home-manager.nixosModules.home-manager
+      {
+        home-manager.users.${user} = {
+          home.stateVersion = defaultStateVersion;
+          imports = [
+            ./home.nix
+            ../desktops/i3/home.nix
+            ../modules
+            ../configs
+          ];
+        };
+      }
+    ];
+  };
+
+  openbox = lib.nixosSystem {
+    inherit system;
+    modules = [
+      ../sysconfigs
+      ../desktops/openbox
+      ./configuration.nix
+
+      home-manager.nixosModules.home-manager
+      {
+        home-manager.users.${user} = {
+          home.stateVersion = defaultStateVersion;
+          imports = [
+            ./home.nix
+            ../desktops/openbox/home.nix
+            ../modules
+            ../configs
+          ];
+        };
+      }
+    ];
+  };
+
+  icewm = lib.nixosSystem {
+    inherit system;
+    modules = [
+      ../sysconfigs
+      ../desktops/icewm
+      ./configuration.nix
+
+      home-manager.nixosModules.home-manager
+      {
+        home-manager.users.${user} = {
+          home.stateVersion = defaultStateVersion;
+          imports = [
+            ./home.nix
+            ../desktops/icewm/home.nix
+            ../modules
+            ../configs
+          ];
+        };
+      }
+    ];
+  };
+
+  qtile = lib.nixosSystem {
+    inherit system;
+    modules = [
+      ../sysconfigs
+      ../desktops/qtile
+      ./configuration.nix
+
+      home-manager.nixosModules.home-manager
+      {
+        home-manager.users.${user} = {
+          home.stateVersion = defaultStateVersion;
+          imports = [
+            ./home.nix
+            ../desktops/qtile/home.nix
+            ../modules
+            ../configs
+          ];
+        };
+      }
+    ];
+  };
+
+  awesome = lib.nixosSystem {
+    inherit system;
+    modules = [
+      ../sysconfigs
+      ../desktops/awesome
+      ./configuration.nix
+
+      home-manager.nixosModules.home-manager
+      {
+        home-manager.users.${user} = {
+          home.stateVersion = defaultStateVersion;
+          imports = [
+            ./home.nix
+            ../desktops/awesome/home.nix
             ../modules
             ../configs
           ];
