@@ -24,7 +24,7 @@
       nixosConfigurations = (
         import ./host {
           inherit (nixpkgs) lib;
-          inherit inputs nixpkgs home-manager user hostname;
+          inherit inputs nixpkgs nur home-manager user hostname;
         }
       );
     };
