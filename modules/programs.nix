@@ -9,23 +9,16 @@
     telegram-desktop
     armcord
 
-    # Professional Software
-    darktable
-    gimp
-
     # Security
-    keepassxc
     bitwarden
 
     # Virtual
     podman
     toolbox
-    distrobox
 
     # Utilities
     gparted
     pavucontrol
-    pcmanfm
 
     # Notes
     obsidian

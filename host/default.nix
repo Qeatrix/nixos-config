@@ -9,7 +9,7 @@ in
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
-    users.quartix = ./home.nix;
+    users.quartix = ./packages.nix;
   };
 
 
@@ -27,7 +27,7 @@ in
         home-manager.users.${user} = {
           home.stateVersion = defaultStateVersion;
           imports = [
-            ./home.nix
+            ./packages.nix
             ../desktops/plasma/home.nix
             ../modules
             ../configs
@@ -50,7 +50,7 @@ in
         home-manager.users.${user} = {
           home.stateVersion = defaultStateVersion;
           imports = [
-            ./home.nix
+            ./packages.nix
             ../desktops/gnome/home.nix
             ../modules
             ../configs
@@ -73,7 +73,7 @@ in
         home-manager.users.${user} = {
           home.stateVersion = defaultStateVersion;
           imports = [
-            ./home.nix
+            ./packages.nix
             ../desktops/pantheon/home.nix
             ../modules
             ../configs
@@ -97,7 +97,7 @@ in
         home-manager.users.${user} = {
           home.stateVersion = defaultStateVersion;
           imports = [
-            ./home.nix
+            ./packages.nix
             ../desktops/dwm/home.nix
             ../modules
             ../configs
@@ -119,7 +119,7 @@ in
         home-manager.users.${user} = {
           home.stateVersion = defaultStateVersion;
           imports = [
-            ./home.nix
+            ./packages.nix
             ../desktops/i3/home.nix
             ../modules
             ../configs
@@ -141,7 +141,7 @@ in
         home-manager.users.${user} = {
           home.stateVersion = defaultStateVersion;
           imports = [
-            ./home.nix
+            ./packages.nix
             ../desktops/openbox/home.nix
             ../modules
             ../configs
@@ -163,7 +163,7 @@ in
         home-manager.users.${user} = {
           home.stateVersion = defaultStateVersion;
           imports = [
-            ./home.nix
+            ./packages.nix
             ../desktops/icewm/home.nix
             ../modules
             ../configs
@@ -185,7 +185,7 @@ in
         home-manager.users.${user} = {
           home.stateVersion = defaultStateVersion;
           imports = [
-            ./home.nix
+            ./packages.nix
             ../desktops/qtile/home.nix
             ../modules
             ../configs
@@ -207,7 +207,7 @@ in
         home-manager.users.${user} = {
           home.stateVersion = defaultStateVersion;
           imports = [
-            ./home.nix
+            ./packages.nix
             ../desktops/awesome/home.nix
             ../modules
             ../configs
