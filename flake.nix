@@ -4,14 +4,13 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nur.url = github:nix-community/NUR;
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, nur, home-manager, ... }:
+  outputs = inputs @ { self, nixpkgs, home-manager, ... }:
     let
       system = "x86_64-linux";
       user = "quartix";
@@ -24,7 +23,7 @@
       nixosConfigurations = (
         import ./host {
           inherit (nixpkgs) lib;
-          inherit inputs nixpkgs nur home-manager user hostname;
+          inherit inputs nixpkgs home-manager user hostname;
         }
       );
     };

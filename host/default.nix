@@ -1,9 +1,9 @@
-{ inputs, nixpkgs, nur, home-manager, user, hostname, ... }:
+{ inputs, nixpkgs, home-manager, user, hostname, ... }:
 
 let
   system = "x86_64-linux";
   lib = nixpkgs.lib;
-  defaultStateVersion = "23.05";
+  defaultStateVersion = "23.11";
 in
 {
   home-manager = {
@@ -43,17 +43,6 @@ in
       ../sysconfigs
       ../desktops/gnome
       ./configuration.nix
-      { nixpkgs.overlays = [ nur.overlay ]; }
-      ({ pkgs, ... }:
-        let
-          nur-no-pkgs = import nur {
-            nurpkgs = import nixpkgs { system = "x86_64-linux"; };
-          };
-        in
-        {
-          imports = [ nur-no-pkgs.repos.iopq.modules.xraya ];
-          services.xraya.enable = true;
-        })
 
 
       home-manager.nixosModules.home-manager
