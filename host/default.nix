@@ -1,4 +1,4 @@
-{ inputs, nixpkgs, home-manager, user, hostname, ... }:
+{ inputs, nixpkgs, nur, home-manager, user, hostname, ... }:
 
 let
   system = "x86_64-linux";
@@ -43,6 +43,7 @@ in
       ../sysconfigs
       ../desktops/gnome
       ./configuration.nix
+      nur.nixosModules.nur
 
 
       home-manager.nixosModules.home-manager
