@@ -3,7 +3,7 @@
 {
   home.packages = with pkgs; [
     # Internet
-    firefox
+    librewolf
 
     # Social
     telegram-desktop
