@@ -49,6 +49,9 @@
     tbb
     cifs-utils
 
+    # More Perfomance Dbus
+    dbus-broker
+
     # Nvidia Related
     gst_all_1.gstreamer
     # Common plugins like "filesrc" to combine within e.g. gst-launch
@@ -132,14 +135,14 @@
       powerManagement.enable = true;
       open = true;
       # package = config.boot.kernelPackages.nvidiaPackages.latest;
-      # package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
+      package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
 
-      package = (config.boot.kernelPackages.nvidiaPackages.stable.overrideAttrs {
-        src = pkgs.fetchurl {
-          url = "https://download.nvidia.com/XFree86/Linux-x86_64/525.125.06/NVIDIA-Linux-x86_64-525.125.06.run";
-          sha256 = "17av8nvxzn5af3x6y8vy5g6zbwg21s7sq5vpa1xc6cx8yj4mc9xm";
-        };
-      });
+      # package = (config.boot.kernelPackages.nvidiaPackages.stable.overrideAttrs {
+      #   src = pkgs.fetchurl {
+      #     url = "https://download.nvidia.com/XFree86/Linux-x86_64/525.125.06/NVIDIA-Linux-x86_64-525.125.06.run";
+      #     sha256 = "17av8nvxzn5af3x6y8vy5g6zbwg21s7sq5vpa1xc6cx8yj4mc9xm";
+      #   };
+      # });
     };
 
     bluetooth = {
