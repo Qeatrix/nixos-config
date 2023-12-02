@@ -16,6 +16,8 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  # boot.initrd.kernelModules = [ "nvidia" ];
+  # boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
 
 
   networking = {
@@ -81,7 +83,7 @@
     users.quartix = {
       hashedPasswordFile = "/etc/nixos/secret.nix";
       isNormalUser = true;
-      extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+      extraGroups = [ "wheel" "networkmanager" "docker" ]; # Enable ‘sudo’ for the user.
     };
 
     defaultUserShell = pkgs.fish;
@@ -95,9 +97,10 @@
     xserver = {
       enable = true;
       layout = "us,ru";
-      xkbOptions = "grp:win_space_toggle";
+      xkbOptions = "grp:alt_shift_toggle";
       videoDrivers = [ "nvidia" ];
       libinput.mouse.accelProfile = "flat";
+      dpi = 85;
     };
 
     openssh.enable = true;
@@ -127,15 +130,17 @@
     opengl = {
       enable = true;
       driSupport32Bit = true;
+      driSupport = true;
     };
 
     nvidia = {
       modesetting.enable = true;
       forceFullCompositionPipeline = false;
       powerManagement.enable = true;
-      open = true;
+      open = false;
       # package = config.boot.kernelPackages.nvidiaPackages.latest;
-      package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
+      # package = config.boot.kernelPackages.nvidiaPackages.stable;
+      # package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
 
       # package = (config.boot.kernelPackages.nvidiaPackages.stable.overrideAttrs {
       #   src = pkgs.fetchurl {
@@ -153,6 +158,7 @@
           Enable = "Source,Sink,Media,Socket";
         };
       };
+
     };
 
     pulseaudio.enable = false;
@@ -160,8 +166,14 @@
 
 
   programs.dconf.enable = true;
-  virtualisation.docker.enable = true;
-  virtualisation.docker.enableNvidia = true;
+  virtualisation.docker = {
+    enable = true;
+    enableNvidia = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
 
 
   # Open ports in the firewall.
@@ -181,7 +193,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
 
   # nixpkgs.config.permittedInsecurePackages = [
   # "electron-21.4.0"

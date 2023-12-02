@@ -52,6 +52,7 @@ in
           imports = [
             ./packages.nix
             ../desktops/gnome/home.nix
+            ../desktops/gnome/desktopfiles.nix
             ../modules
             ../configs
           ];
@@ -209,6 +210,28 @@ in
           imports = [
             ./packages.nix
             ../desktops/awesome/home.nix
+            ../modules
+            ../configs
+          ];
+        };
+      }
+    ];
+  };
+
+  herbstluftwm = lib.nixosSystem {
+    inherit system;
+    modules = [
+      ../sysconfigs
+      ../desktops/herbstluftwm
+      ./configuration.nix
+
+      home-manager.nixosModules.home-manager
+      {
+        home-manager.users.${user} = {
+          home.stateVersion = defaultStateVersion;
+          imports = [
+            ./packages.nix
+            ../desktops/herbstluftwm/home.nix
             ../modules
             ../configs
           ];

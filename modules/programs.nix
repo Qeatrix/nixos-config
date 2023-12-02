@@ -15,6 +15,7 @@
     # Virtual
     podman
     toolbox
+    distrobox
 
     # Utilities
     gparted
@@ -39,6 +40,8 @@
     unzip
     lua-language-server
     figma-agent
+    nodejs
+    vimHugeX
     # (python3.withPackages (ps: with ps; [ torch ]))
   ];
 

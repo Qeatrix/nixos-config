@@ -18,10 +18,10 @@
     "fs.file-max" = 524288;
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
-  boot.extraModulePackages = with config.boot.kernelPackages; [
-    v4l2loopback
-  ];
+  # boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  # boot.extraModulePackages = with config.boot.kernelPackages; [
+  #   v4l2loopback
+  # ];
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "steam"

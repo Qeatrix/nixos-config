@@ -8,6 +8,7 @@
   environment.systemPackages = with pkgs; [
     nvidia-vaapi-driver
     egl-wayland
+    libsForQt5.qtstyleplugin-kvantum
   ];
 
   environment.gnome.excludePackages = (with pkgs; [
@@ -25,6 +26,11 @@
     atomix # puzzle game
   ]);
 
+
+  programs.kdeconnect = {
+    enable = true;
+    package = pkgs.gnomeExtensions.gsconnect;
+  };
 
   services = {
 
@@ -45,6 +51,11 @@
       # Test
       nvidia-vaapi-driver
     ];
+  };
+
+  environment.variables = {
+    # This will become a global environment variable
+    "QT_STYLE_OVERRIDE" = "kvantum";
   };
 }
 

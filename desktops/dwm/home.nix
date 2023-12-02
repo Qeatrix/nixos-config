@@ -21,7 +21,7 @@
     ranger
     ueberzug
   ];
-  
+
 
   # Setup Monitors
   programs.autorandr = {
@@ -41,7 +41,7 @@
             primary = true;
             rate = "74.97";
           };
-          
+
           HDMI-2.enable = true;
           HDMI-2 = {
             crtc = 1;
@@ -54,14 +54,16 @@
     };
   };
 
-  nixpkgs.overlays = [ (self: super:
-    {
-      st = super.st.overrideAttrs (old: {
-        patches = (old.patches or []) ++ [
-          ./patches/st-scrollback-0.8.5.diff
-          ./patches/st-hidecursor-0.8.3.diff
-        ];
-      });
-    }
-  ) ];
+  nixpkgs.overlays = [
+    (self: super:
+      {
+        st = super.st.overrideAttrs (old: {
+          patches = (old.patches or [ ]) ++ [
+            ./patches/st-scrollback-0.8.5.diff
+            ./patches/st-hidecursor-0.8.3.diff
+          ];
+        });
+      }
+    )
+  ];
 }
