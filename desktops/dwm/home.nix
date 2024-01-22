@@ -12,6 +12,7 @@
     xcompmgr
     clipmenu
     clipnotify
+    qutebrowser
 
     ## Screenshot
     maim

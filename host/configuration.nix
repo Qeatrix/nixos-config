@@ -16,6 +16,7 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelParams = [ "clearcpuid=514" ];
   # boot.initrd.kernelModules = [ "nvidia" ];
   # boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
 
@@ -51,9 +52,6 @@
     tbb
     cifs-utils
 
-    # More Perfomance Dbus
-    dbus-broker
-
     # Nvidia Related
     gst_all_1.gstreamer
     # Common plugins like "filesrc" to combine within e.g. gst-launch
@@ -69,6 +67,8 @@
 
     nvidia-vaapi-driver
     nvidia-system-monitor-qt
+
+    ntfs3g
 
     linuxKernel.packages.linux_xanmod_latest.v4l2loopback
   ];
@@ -103,8 +103,6 @@
       dpi = 85;
     };
 
-    openssh.enable = true;
-
     ## Audio Server
     pipewire = {
       enable = true;
@@ -116,6 +114,8 @@
     };
 
     flatpak.enable = true;
+    openssh.enable = true;
+    dbus.implementation = "broker";
   };
 
   sound = {
@@ -193,7 +193,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.01";
 
   # nixpkgs.config.permittedInsecurePackages = [
   # "electron-21.4.0"

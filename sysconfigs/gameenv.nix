@@ -5,7 +5,8 @@
     # Needed to succesfully start Steam
     steam = {
       enable = true;
-      #remotePlay.openFirewall = true;          # Ports for Stream Remote Play
+      gamescopeSession.enable = true;
+      # remotePlay.openFirewall = true;          # Ports for Stream Remote Play
     };
     gamemode.enable = true; # Better gaming performance
     # Steam: Right-click game - Properties - Launch options: gamemoderun %command%

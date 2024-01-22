@@ -8,5 +8,6 @@
     mangohud
     goverlay
     gamescope
+    minetest
   ];
 }

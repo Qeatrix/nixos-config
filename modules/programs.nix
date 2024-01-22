@@ -3,7 +3,7 @@
 {
   home.packages = with pkgs; [
     # Internet
-    librewolf
+    firefox
 
     # Social
     telegram-desktop
@@ -22,7 +22,7 @@
     pavucontrol
 
     # Notes
-    obsidian
+    ## obsidian
 
     # Tools
     git
@@ -35,13 +35,14 @@
     jdk8
     wl-clipboard
     gperftools
-    feh
     samba
     unzip
-    lua-language-server
     figma-agent
     nodejs
     vimHugeX
+    bottles
+    blender
+    glfw-wayland
     # (python3.withPackages (ps: with ps; [ torch ]))
   ];
 

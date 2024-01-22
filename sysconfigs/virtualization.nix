@@ -2,7 +2,7 @@
 
 {
   virtualisation = {
-    # containers.enable = true;
+    containers.enable = true;
     # vmware.host.enable = true;
   };
 }
