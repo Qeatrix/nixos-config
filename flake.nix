@@ -16,14 +16,12 @@
       user = "quartix";
       location = "$HOME/.setup";
       hostname = "qnt";
-
     in
     {
-
       nixosConfigurations = (
         import ./host {
           inherit (nixpkgs) lib;
-          inherit inputs nixpkgs home-manager user hostname;
+          inherit nixpkgs home-manager user hostname;
         }
       );
     };

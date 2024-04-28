@@ -9,6 +9,7 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./pkgs.nix
     ];
 
   services.logrotate.checkConfig = false;
@@ -67,10 +68,13 @@
 
     nvidia-vaapi-driver
     nvidia-system-monitor-qt
+    nvidia-docker
 
     ntfs3g
 
     linuxKernel.packages.linux_xanmod_latest.v4l2loopback
+
+    localpkgs.platinum
   ];
   environment.localBinInPath = true;
   fonts.fontDir.enable = true;
@@ -83,7 +87,7 @@
     users.quartix = {
       hashedPasswordFile = "/etc/nixos/secret.nix";
       isNormalUser = true;
-      extraGroups = [ "wheel" "networkmanager" "docker" ]; # Enable ‘sudo’ for the user.
+      extraGroups = [ "wheel" "networkmanager" "docker" "vboxusers" ]; # Enable ‘sudo’ for the user.
     };
 
     defaultUserShell = pkgs.fish;
@@ -116,6 +120,15 @@
     flatpak.enable = true;
     openssh.enable = true;
     dbus.implementation = "broker";
+
+    printing.enable = true;
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
+
+    blueman.enable = true;
   };
 
   sound = {
@@ -152,6 +165,7 @@
 
     bluetooth = {
       enable = true;
+      powerOnBoot = true;
       hsphfpd.enable = false;
       settings = {
         General = {
@@ -216,7 +230,8 @@
   environment.sessionVariables = rec {
     EDITOR = "hx";
     COLORTERM = "truecolor";
-    FREETYPE_PROPERTIES = "cff:no-stem-darkening=0 autofitter:no-stem-darkening=0";
+    # FREETYPE_PROPERTIES = "cff:no-stem-darkening=0 autofitter:no-stem-darkening=0";
+    FREETYPE_PROPERTIES="autofitter:no-stem-darkening=0 autofitter:darkening-parameters=500,0,1000,400,1500,350,1700,0 truetype:interpreter-version=38";
   };
 }
 

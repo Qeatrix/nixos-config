@@ -7,7 +7,6 @@
 
     # Social
     telegram-desktop
-    armcord
 
     # Security
     bitwarden
@@ -40,9 +39,16 @@
     figma-agent
     nodejs
     vimHugeX
+    neovim
     bottles
     blender
+    clang
+    emmet-ls
     glfw-wayland
+    kitty
+    mate.mate-terminal
+    zoxide
+    vscodium
     # (python3.withPackages (ps: with ps; [ torch ]))
   ];
 
