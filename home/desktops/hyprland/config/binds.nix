@@ -38,6 +38,7 @@ in {
         "SUPER, G, togglegroup"
         "SUPER, TAB, changegroupactive, f"
         "SUPERSHIFT, TAB, changegroupactive, b"
+        "SUPER, up, moveintogroup, f"
 
         # Special workspace
         "SUPER, O, togglespecialworkspace, magic"
@@ -75,6 +76,11 @@ in {
         "SUPER, Q, exec, ${pkgs.pamixer}/bin/pamixer --decrease 5"
         "SUPER, E, exec, ${pkgs.pamixer}/bin/pamixer --increase 5"
         "SUPER, B, exec, ${pkgs.pamixer}/bin/pamixer --default-source --toggle-mute"
+      ];
+
+      bindm = [
+        "${mod}, mouse:272, movewindow"
+        "${mod}, mouse:273, resizewindow"
       ];
     };
 

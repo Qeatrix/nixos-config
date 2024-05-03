@@ -125,6 +125,12 @@
       enable = true;
       driSupport32Bit = true;
       driSupport = true;
+      package = (config.boot.kernelPackages.nvidiaPackages.stable.overrideAttrs {
+        src = pkgs.fetchurl {
+          url = "https://us.download.nvidia.com/XFree86/Linux-x86_64/535.171.04/NVIDIA-Linux-x86_64-535.171.04.run";
+          sha256 = "sha256-6PFkO0vJXYrNZaRHB4SpfazkZC8UkjZGYSDbKqlCQ3o=";
+        };
+      });
     };
 
     nvidia = {
@@ -162,7 +168,7 @@
 
   programs.dconf.enable = true;
   virtualisation.docker = {
-    enable = true;
+    enable = false;
     enableNvidia = true;
     rootless = {
       enable = true;

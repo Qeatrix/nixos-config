@@ -5,5 +5,6 @@
     ./programs
     ./services
     ./hardware
+    ./nix
   ];
 }

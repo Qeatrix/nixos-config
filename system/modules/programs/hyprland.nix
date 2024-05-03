@@ -8,7 +8,7 @@
   environment.sessionVariables = {
     "NIXOS_OZONE_WL" = 1;
 
-    "HYPRCURSOR_SIZE" = "35";
+    "HYPRCURSOR_SIZE" = "16";
     "HYPRCURSOR_THEME" = "macOS-Monterey";
 
     "MOZ_ENABLE_WAYLAND" = 1;

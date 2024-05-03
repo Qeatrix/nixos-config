@@ -8,6 +8,7 @@
     ./overlays
     ./programs
     ./desktops/hyprland
+    ./gui
   ];
 
   nixpkgs.config = {

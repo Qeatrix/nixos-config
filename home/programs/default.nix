@@ -6,16 +6,23 @@
     ./browser
     ./cmd
     ./discord
+    ./nvim
+    ./direnv
   ];
 
   home.packages = with pkgs; [
+    # Design
+    figma-linux
+    figma-agent
+
     prismlauncher
     zoxide
     tdesktop
-    neovim
-    nh
     wireguard-tools
     git
+    unzip
+    gparted
+    wget
 
     # Libs
     glib
