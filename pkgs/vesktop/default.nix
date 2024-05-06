@@ -31,7 +31,7 @@
 in
   stdenv.mkDerivation rec {
     pname = "vesktop";
-    version = "1.5.1";
+    version = "1.5.2";
 
     src = fetchFromGitHub {
       owner = "kaitlynkittyy"; #"Vencord";

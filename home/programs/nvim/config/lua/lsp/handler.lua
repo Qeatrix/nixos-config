@@ -13,6 +13,8 @@ M.capabilities = {
 }
 
 M.on_attach = function(client, bufnr)
+    require'completion'.on_attach(client)
+
     local map = function(mode, key, action)
         vim.keymap.set(mode, key, action, { buffer = bufnr, silent = true, noremap = true })
     end

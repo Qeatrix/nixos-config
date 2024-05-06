@@ -19,7 +19,7 @@ PREF = {
             "jsonls",
             "nil_ls",
             "gopls",
-	    "rust-analyzer",
+	    "rust_analyzer",
         },
     },
 
@@ -30,7 +30,7 @@ PREF = {
             Hint  = "🤯",
             Info  = "🤓",
         },
-        colorscheme = "catppuccin",
+        colorscheme = "monokai",
         border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
     }
 }
